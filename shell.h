@@ -10,7 +10,21 @@
 #include <sys/stat.h>
 #include <string.h>
 
+/** Command Data Struct (draft) */
 
+struct SimpleCommand {
+	//Available space for arguments currently preallocated
+	int _numberOfAvailableArguments;
+
+	//Number of arguments
+	int _numberOfArguments;
+
+	//Array of arguments
+	char **_arguments;
+
+	SimpleCommand();
+	void insertArgument( char * argument );
+};
 
 
 #endif
