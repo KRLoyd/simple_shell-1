@@ -21,10 +21,8 @@ struct SimpleCommand {
 
 	//Array of arguments
 	char **_arguments;
-
-	SimpleCommand();
-	void insertArgument( char * argument );
 };
 
+void insertArgument(char *argument);
 
 #endif
