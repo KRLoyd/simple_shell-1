@@ -27,5 +27,9 @@ struct SimpleCommand {
 	void insertArgument( char * argument );
 };
 
+int shellbook(int argc, char **argv);
+void prompt_string_one(void);
+void prompt_string_two(void);
+char *read_shellbook(void);
 
 #endif
