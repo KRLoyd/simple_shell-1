@@ -22,14 +22,15 @@ struct SimpleCommand {
 
 	//Array of arguments
 	char **_arguments;
-
-	SimpleCommand();
-	void insertArgument( char * argument );
 };
 
+<<<<<<< HEAD
 int shellbook(int argc, char **argv);
 void prompt_string_one(void);
 void prompt_string_two(void);
 char *read_shellbook(void);
+=======
+void insertArgument(char *argument);
+>>>>>>> 955a42e30215793394d24ad70fe98e863232b155
 
 #endif
