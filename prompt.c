@@ -8,7 +8,7 @@
 
 void prompt_string_one(void)
 {
-	printf(stderr, "$");
+	_printf(stderr, "$");
 }
 
 /**
@@ -19,5 +19,5 @@ void prompt_string_one(void)
 
 void prompt_string_two(void)
 {
-	printf(stderr, "> ");
+	_printf(stderr, "> ");
 }

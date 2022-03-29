@@ -38,7 +38,7 @@ int shellbook(int argc, char **argv)
             break;
         }
 
-        printf("%s\n", cmd);
+        _printf("%s\n", cmd);
 
         free(cmd);
 
@@ -83,7 +83,7 @@ char *read_shellbook(void)
 
         if(!ptr)
         {
-            fprintf(stderr, "error: failed to alloc buffer: %s\n", strerror(errno));
+            _printf(stderr, "error: failed to alloc buffer: %s\n", strerror(errno));
             return NULL;
         }
 
@@ -98,7 +98,7 @@ char *read_shellbook(void)
 
             ptr[ptrlen+buflen-2] = '\0';
             buflen -= 2;
-            print_prompt2();
+            prompt_string_two();
         }
 
         ptrlen += buflen;
