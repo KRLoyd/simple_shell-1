@@ -1,18 +1,59 @@
-#include "shell.h"
+/**
+ * read_shellbook - shell function
+ * Return: prompt
+ */
 
-//* work in progress */
-
-char *line_reader(void)
+char *read_shellbook(void)
 {
-	char *buffer;
-	size_t bufsize = 0;
+    char buf[1024];
+    char *ptr = NULL;
+    char ptrlen = 0;
 
-	if (isatty(STDIN_FILENO) == 1)
-	    write(1, "$ ", 2);
-	    if (getline(&buffer, &bufsize, stdin) <= 0)
-	    {
-		    if (isatty(STDIN_FILENO) == 1)
-			    write(STDOUT_FILENO, "\n", 1);
-	    }
-	    return (buffer);
+    while(fgets(buf, 1024, stdin))
+    {
+        int buflen = strlen(buf);
+
+        if(!ptr)
+        {
+            ptr = malloc(buflen+1);
+        }
+        else
+        {
+            char *ptr2 = realloc(ptr, ptrlen+buflen+1);
+
+            if(ptr2)
+            {
+                ptr = ptr2;
+            }
+            else
+            {
+                free(ptr);
+                ptr = NULL;
+            }
+        }
+
+        if(!ptr)
+        {
+            _printf(stderr, "error: failed to alloc buffer: %s\n", strerror(errno));
+            return NULL;
+        }
+
+        strcpy(ptr+ptrlen, buf);
+
+        if(buf[buflen-1] == '\n')
+        {
+            if(buflen == 1 || buf[buflen-2] != '\\')
+            {
+                return ptr;
+            }
+
+            ptr[ptrlen+buflen-2] = '\0';
+            buflen -= 2;
+            prompt_string_two();
+        }
+
+        ptrlen += buflen;
+    }
+
+    return ptr;
 }

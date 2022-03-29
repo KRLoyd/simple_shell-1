@@ -13,96 +13,36 @@
 
 int shellbook(int argc, char **argv)
 {
-    char *cmd;
+    char *wand;
 
     do
     {
         prompt_string_one();
 
-        cmd = read_cmd();
+        wand = read_shellbook();
 
-        if(!cmd)
+        if(!wand)
         {
             exit(EXIT_SUCCESS);
         }
 
-        if(cmd[0] == '\0' || strcmp(cmd, "\n") == 0)
+        if(wand[0] == '\0' || strcmp(wand, "\n") == 0)
         {
-            free(cmd);
+            free(wand);
             continue;
         }
 
-        if(strcmp(cmd, "exit\n") == 0)
+        if(strcmp(wand, "exit\n") == 0)
         {
-            free(cmd);
+            free(wand);
             break;
         }
 
-        _printf("%s\n", cmd);
+        _printf("%s\n", wand);
 
-        free(cmd);
+        free(wand);
 
     } while(1);
 
     exit(EXIT_SUCCESS);
-}
-
-/**
- * read_shellbook - shell function
- * Return: prompt
- */
-
-char *read_shellbook(void)
-{
-    char buf[1024];
-    char *ptr = NULL;
-    char ptrlen = 0;
-
-    while(fgets(buf, 1024, stdin))
-    {
-        int buflen = strlen(buf);
-
-        if(!ptr)
-        {
-            ptr = malloc(buflen+1);
-        }
-        else
-        {
-            char *ptr2 = realloc(ptr, ptrlen+buflen+1);
-
-            if(ptr2)
-            {
-                ptr = ptr2;
-            }
-            else
-            {
-                free(ptr);
-                ptr = NULL;
-            }
-        }
-
-        if(!ptr)
-        {
-            _printf(stderr, "error: failed to alloc buffer: %s\n", strerror(errno));
-            return NULL;
-        }
-
-        strcpy(ptr+ptrlen, buf);
-
-        if(buf[buflen-1] == '\n')
-        {
-            if(buflen == 1 || buf[buflen-2] != '\\')
-            {
-                return ptr;
-            }
-
-            ptr[ptrlen+buflen-2] = '\0';
-            buflen -= 2;
-            prompt_string_two();
-        }
-
-        ptrlen += buflen;
-    }
-
-    return ptr;
 }
