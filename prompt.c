@@ -1,4 +1,5 @@
 #include <shell.h>
+#include "symtab/symtab.h"
 
 /**
  * prompt_string_one - program startup
@@ -8,7 +9,16 @@
 
 void prompt_string_one(void)
 {
-	_printf(stderr, "$");
+	struct symtab_entry_s *entry = get_symtab_entry("PS1");
+
+    if(entry && entry->val)
+    {
+        fprintf(stderr, "%s", entry->val);
+    }
+    else
+    {
+        fprintf(stderr, "$ ");
+    }
 }
 
 /**

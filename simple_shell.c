@@ -15,6 +15,8 @@ int shellbook(int argc, char **argv)
 {
     char *wand;
 
+    initsh();
+
     do
     {
         prompt_string_one();
@@ -38,11 +40,43 @@ int shellbook(int argc, char **argv)
             break;
         }
 
-        _printf("%s\n", wand);
+        struct source_s src;
+        src.buffer   = wand;
+        src.bufsize  = strlen(wand);
+        src.curpos   = INIT_SRC_POS;
+        avada(&src);
 
         free(wand);
 
     } while(1);
 
     exit(EXIT_SUCCESS);
+}
+
+int avada(struct source_s *src)
+{
+    skip_white_spaces(src);
+
+    struct token_s *tok = tokenize(src);
+
+    if(tok == &eof_token)
+    {
+        return 0;
+    }
+
+    while(tok && tok != &eof_token)
+    {
+        struct node_s *wand = parse_simple_command(tok);
+
+        if(!wand)
+        {
+            break;
+        }
+
+        do_simple_command(wand);
+        free_node_tree(wand);
+        tok = tokenize(src);
+    }
+
+    return 1;
 }
