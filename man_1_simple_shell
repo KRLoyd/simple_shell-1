@@ -7,14 +7,28 @@
 -\ A shell that handles command lines with arguments
 
 .SH SYNOPSIS
-.B #include "main.h"
+.B ./abra
+[command] [options] [FILE]
 
-.B int /*FILL IN LATER: name of the function and variables*/
-.I format
-.B, ...)
+
 .SH Description
-.B simple_shell()
-/*Description of what the shell does goes here*/
+.B ./abra
+
+The shell (Also refered to as Shellbook, or Abra) is a simple shell capable of handing standard arguments fed into the system (excluding piping).
+
+.I FORMAT [ARGUMENT]...
+.SH OPTIONS
+.B abra
+may be initiated and then and then can receive commands after the prompt is loaded.
+
+.SH ARGUMENTS
+The first argument (0) is the command to be run. All that follow are modifiers or options.
+
+.B Example
+.IP
+$./abra
+mv file_template_0.c file_template1.c
+
 
 .SH Return Value
 /* On success, state what goes here */
@@ -22,10 +36,12 @@
 /* this part to include the various arguments to be filled in */
 
 .SH SEE ALSO
-/*type of function*/
+.I sh(1)
+,
+.I bash(1)
 
 .SH BUGS
-TBD.
+TBD. Any bugs found, please contact emails listed in copyright.
 
 #COPYRIGHT
 Copyright 2022 Baylee Duncan, Logan McClain, & NV Ozmus. This is free software: You are free to copy and modify it for personal use unless this is for a grade at Holberton School or any affiliate. There is NO WARRANTY, to the extent permitted by the law.
